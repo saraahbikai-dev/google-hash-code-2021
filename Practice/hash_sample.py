@@ -12,11 +12,12 @@ n_pizzas = logistics[0]
 n_one = logistics[1]
 
 raw=[]
+qty=[]
 for i in range(1,len(inp)):
     raw.append((inp[i].strip()[1:]).strip())
-
+    qty.append((inp[i].strip()[0]).strip())
 print(raw)
-
+n_piztypes = len(raw)
 
 # Part 2: Create Over Lap Matrix
 
@@ -41,12 +42,13 @@ def create_overlap_matrix(raw):
             ov_mat[i][j]=get_num_overlaps(raw[i], raw[j])
     
     
-    starter = np.argmin(np.sum(ov_mat, axis=1))
+    starter = np.argsort(np.sum(ov_mat, axis=1))
     return (ov_mat, starter )
 Overlap_Matrix, Starter=create_overlap_matrix(raw)
 
 
 # Part 3: Allocation
+rankie = np.zeroes(n_piztypes*2).reshape(n_piztypes,2)
 
 
 # Part 4: Create Output (Submission File)
